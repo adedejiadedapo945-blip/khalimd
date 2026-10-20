@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>khalimd | My Website</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5efff;
+            color: #342447;
+        }
+
+        nav {
+            background: #572b83;
+            padding: 18px 10px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #e2c7ff;
+        }
+
+        .card {
+            background: white;
+            max-width: 650px;
+            margin: 35px auto;
+            padding: 35px 25px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 5px 20px #dfd0f0;
+        }
+
+        h1, h2 {
+            color: #7040a0;
+        }
+
+        .profile {
+            width: 125px;
+            height: 125px;
+            margin: 10px auto 20px;
+            border-radius: 50%;
+            background: #eadbff;
+            border: 4px solid #8b5ac2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        button {
+            background: #7040a0;
+            color: white;
+            border: none;
+            padding: 13px 22px;
+            border-radius: 9px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #572b83;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #6c5b7b;
+        }
+
+        @media (max-width: 480px) {
+            nav a {
+                margin: 0 6px;
+                font-size: 14px;
+            }
+
+            .card {
+                margin: 20px 12px;
+                padding: 25px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About Me</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section class="card" id="home">
+        <div class="profile" aria-label="Profile picture placeholder">
+            👤
+        </div>
+
+        <h1>Welcome to My Website!</h1>
+        <h2>I'm khalimd</h2>
+
+        <p>
+            I am learning Python and website development.
+        </p>
+
+        <button onclick="alert('Hello! Thanks for visiting my website!')">
+            Say Hello!
+        </button>
+    </section>
+
+    <section class="card" id="about">
+        <h1>About Me</h1>
+        <p>
+            Hello! My name is khalimd.
+        </p>
+        <p>
+            I am learning Python and website development.
+            I enjoy technology, creativity, and learning
+            new skills.My goal is to be skilled web
+            developer.                                              
+            This is my personal website, and I am building
+            it step by step.
+        </p>
+    </section>
+
+    <section class="card" id="contact">
+        <h1>Contact</h1>
+        <p>Thank you for visiting my website!</p>
+        <p>You can add your contact details here later.</p>
+    </section>
+
+    <footer>
+        <p>Made by khalimd | My First Website</p>
+    </footer>
+
+
+<h2>🎮 Rock, Paper, Scissors</h2>
+<p>Choose your move and challenge the computer!</p>
+
+<div class="game-buttons">
+    <button onclick="playGame('rock')">🪨 Rock</button>
+    <button onclick="playGame('paper')">📄 Paper</button>
+    <button onclick="playGame('scissors')">✂️ Scissors</button>
+</div>
+
+<h3 id="game-result">Make your first move!</h3>
+<p id="game-score">You: 0 | Computer: 0</p>
+<button onclick="playAgain()">Play Again</button>
+<button onclick="resetScore()">Reset Score</button>
+
+<script>
+let playerScore = 0;
+let computerScore = 0;
+
+function playGame(player) {
+    const choices = ["rock", "paper", "scissors"];
+    const computer = choices[Math.floor(Math.random() * 3)];
+
+    let result = "";
+
+    if (player === computer) {
+        result = "It's a draw! 🤝";
+    } else if (
+        (player === "rock" && computer === "scissors") ||
+        (player === "paper" && computer === "rock") ||
+        (player === "scissors" && computer === "paper")
+    ) {
+        result = "You win this round! 🎉";
+        playerScore++;
+    } else {
+        result = "The computer wins this round! 🤖";
+        computerScore++;
+    }
+
+    document.getElementById("game-result").textContent =
+        "You chose " + player + ". Computer chose " + computer +
+        ". " + result;
+
+    document.getElementById("game-score").textContent =
+        "You: " + playerScore + " | Computer: " + computerScore;
+}
+function playAgain() {
+    document.getElementById("game-result").textContent =
+        "Choose Rock, Paper, or Scissors to play again!";
+}
+
+function resetScore() {
+    playerScore = 0;
+    computerScore = 0;
+
+    document.getElementById("game-result").textContent =
+        "Score reset! Make your move.";
+
+    document.getElementById("game-score").textContent =
+        "You: 0 | Computer: 0";
+}
+</script>
+<section id="live-clock" style="background:#f1e8ff; color:#54258a; padding:20px; margin:20px auto; border-radius:15px; text-align:center;">
+    <h2>🕒 My Live Clock</h2>
+    <h3 id="clock-time">Loading time...</h3>
+    <p id="clock-date">Loading date...</p>
+</section>
+
+<script>
+function updateClock() {
+    const now = new Date();
+
+    document.getElementById("clock-time").textContent =
+        now.toLocaleTimeString("en-NG", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: true
+        });
+
+    document.getElementById("clock-date").textContent =
+        now.toLocaleDateString("en-NG", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        });
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+</script>
+<section style="background:#f1e8ff; color:#54258a; padding:25px; margin:20px auto; border-radius:18px; text-align:center;">
+    <h2>✨ Daily Motivation ✨</h2>
+
+    <p id="daily-quote" style="font-size:20px;">
+        Believe in yourself!
+    </p>
+    <button onclick="newQuote()">new Quote</button>
+    <button onclick="newQuote()" style="background:#7139ad; color:white; padding:12px 22px; border:none; border-radius:10px; cursor:pointer;">
+        ✨ New Quote
+    </button>
+</section><script>
+const quotes = [
+    "Believe in yourself!",
+    "Never give up on your dreams!",
+    "Small steps lead to big results!",
+    "You are stronger than you think!",
+    "Every day is a new opportunity!"
+];
+
+function newQuote() {
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+
+    document.getElementById("daily-quote").textContent =
+        quotes[randomIndex];
+}
+</script>
+</body>
+</html>
